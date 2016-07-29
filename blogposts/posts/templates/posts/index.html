@@ -1,0 +1,22 @@
+<h1> POSTS APP </h1><br /><br />
+
+<form action="{% url 'posts:new_post' user_id %}" method="post">
+{% csrf_token %}
+<textarea name="post" rows="4" cols="50" id="post">Post Something...</textarea>
+<input type="Submit" value="Post" />
+</form>
+
+{% if post_list %}
+	<ul>
+	{% for post in post_list %}
+		<li><b>Post:{{forloop.counter}}:-</b>  <a href="{% url 'posts:comment' post.id user_id %}">{{ post.post_text }}</a></li>
+	{% endfor %}
+	</ul>
+{% else %}
+	<p> No Posts are available. </p>
+{% endif %}
+
+<br /><br /><br /><br /><br />
+<form method="get" action="{% url 'posts:logout' user_id %}">
+	<button type="submit">LOGOUT</button>
+</form>

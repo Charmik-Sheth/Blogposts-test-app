@@ -1,0 +1,20 @@
+<h1> POSTS APP </h1> <br /><br />
+
+<h2> {{post.post_text}} </h2>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+{% for comment in post.comment_set.all %}
+	<ul>Comment:{{forloop.counter}}:- {{comment.comment_text}}</ul>
+{% endfor %}
+
+<form action="{% url 'posts:new_comment' post.id user_id %}" method="post">
+{% csrf_token %}
+<textarea name="comment" rows="4" cols="50" id="comment">Write your comment here...</textarea>
+<input type="Submit" value="Comment" />
+</form>
+
+<br /><br /><br /><br /><br />
+<form method="get" action="{% url 'posts:logout' user_id %}">
+	<button type="submit">LOGOUT</button>
+</form>
