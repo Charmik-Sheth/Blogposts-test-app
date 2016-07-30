@@ -10,6 +10,7 @@ def index(request, user_id):
 		if(request.session['user_id']==int(user_id)):
 			#print "in if"
 			post_list = Post.objects.order_by('pub_date')
+			users = User.objects.all()
 			return render(request, 'posts/index.html', {'post_list': post_list, 'user_id': user_id})
 		else:
 			#print "in else"

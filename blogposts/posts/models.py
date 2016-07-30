@@ -10,20 +10,19 @@ class User(models.Model):
 
 
 class Post(models.Model):
-	#user = models.ForeignKey(User)
+	user = models.ForeignKey(User)
 	post_text = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published')
 
 	def __unicode__(self):
-		return self.post_text
+		return self.post_text	
 
 
 class Comment(models.Model):
-	#user = models.ForeignKey(User)
+	user = models.ForeignKey(User)
 	post = models.ForeignKey(Post)
 	comment_text = models.CharField(max_length=200)
 	pub_date = models.DateTimeField('date published')
 
 	def __unicode__(self):
 		return self.comment_text
-

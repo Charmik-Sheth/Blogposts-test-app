@@ -5,7 +5,7 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 {% for comment in post.comment_set.all %}
-	<ul>Comment:{{forloop.counter}}:- {{comment.comment_text}}</ul>
+	<ul>{{comment.user.user_name}}:- {{comment.comment_text}}</ul>
 {% endfor %}
 
 <form action="{% url 'posts:new_comment' post.id user_id %}" method="post">

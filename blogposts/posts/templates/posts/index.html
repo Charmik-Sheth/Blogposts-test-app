@@ -9,7 +9,7 @@
 {% if post_list %}
 	<ul>
 	{% for post in post_list %}
-		<li><b>Post:{{forloop.counter}}:-</b>  <a href="{% url 'posts:comment' post.id user_id %}">{{ post.post_text }}</a></li>
+		<li><b>Post by {{post.user.user_name}}:-</b>  <a href="{% url 'posts:comment' post.id user_id %}">{{ post.post_text }}</a></li>
 	{% endfor %}
 	</ul>
 {% else %}
