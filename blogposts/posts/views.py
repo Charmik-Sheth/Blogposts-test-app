@@ -36,7 +36,7 @@ def new_post(request, user_id):
 		if(request.session['user_id']==int(user_id)):	
 			post_text = request.POST['post']
 			if (post_text != "Post Something...") and (post_text != ""):
-				new_post = Post(post_text=post_text, pub_date=timezone.now())
+				new_post = Post(post_text=post_text, pub_date=timezone.now(), user_id=int(user_id))
 				new_post.save()
 
 			return HttpResponseRedirect(reverse('posts:index', args=(user_id,)))
@@ -53,7 +53,7 @@ def new_comment(request, post_id, user_id):
 			post = Post.objects.get(pk=post_id)
 			comment_text = request.POST['comment']
 			if (comment_text != "Write your comment here...") and (comment_text != ""):
-				post.comment_set.create(comment_text=comment_text, pub_date=timezone.now())
+				post.comment_set.create(comment_text=comment_text, pub_date=timezone.now(), user_id=post.user_id)
 
 			return HttpResponseRedirect(reverse('posts:comment', args=(post.id, user_id,)))
 
